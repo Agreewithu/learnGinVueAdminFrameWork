@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Vue Basic</title>
+        <style>
+            .active{
+                color: red;
+            }
+            .hidden{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            {{message}}
+            <input type="text" v-model="message">
+
+            <ul>
+                <li v-for="(item,key) in list" :key="key" :class="item.hidden?'hidden':''">{{item.name}}</li>
+            </ul>
+
+            <button v-on:click="add(3)">+</button>
+            <span>{{num}}</span>
+            <button @click="minus">-</button>
+
+
+            <div v-bind:class="message==='red'?'active':''">
+                This part is used as test example of v-bind
+                v-bind with class
+            </div>
+
+            <div :style="{color:message}">
+                This part is used as test example of v-bind
+                v-bind with style
+            </div>
+
+        </div>
+    </body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                message:"",
+                list:[
+                    {
+                        name:"Albert",
+                        hidden:true
+                    },
+                    {
+                        name:"Agreewithu",
+                        hidden:false
+                    },
+                    {
+                        name:"PoorInMind",
+                        hidden:false
+                    }
+                ],
+                num:0,
+            },
+            methods:{
+                    add(skip){
+                        console.log(skip)
+                        this.num++
+                    },
+                    minus(){
+                        this.num--
+                    }
+                }
+        })
+    </script>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Vue Basic</title>
+    </head>
+    <body>
+        <div id="app">
+
+            <work-hard></work-hard>
+
+            <hurry-up></hurry-up>
+
+            <agreewithu-first></agreewithu-first>
+
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+        <template id="agreewithuFirst">
+            <h2>{{user}}</h2>
+        </template>
+
+        <script>
+
+            Vue.component("workHard",{
+                name:"workHard",
+                data(){
+                    return{
+                        hello:"hello, world~"
+                    }
+                },
+                template:"<h1>{{hello}}</h1>"
+            })
+
+            var hurryUp = {
+                name:"hurryUp",
+                data(){
+                    return{
+                        prompt:"Hurry Up~"
+                    }
+                },
+                template:"<h2>{{prompt}}</h2>"
+            }
+
+            var agreewithuFirst = {
+                name:"agreewithuFirst",
+                data(){
+                    return{
+                        user:"agreewithu"
+                    }
+                },
+                template:"#agreewithuFirst"
+            }
+
+            var app = new Vue({
+                el:"#app",
+                data:{},
+                methods:{},
+                components:{
+                    hurryUp:hurryUp,
+                    agreewithuFirst:agreewithuFirst
+                }
+            })
+        </script>
+    </body>
+</html>

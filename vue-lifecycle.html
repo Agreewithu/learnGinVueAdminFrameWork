@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Vue Basic</title>
+    </head>
+    <body>
+        <div id="app">
+            <ul>
+                <li v-for="(item,key) in list" :key="key">{{item}}</li>
+            </ul>
+
+            <button @click="addList">+</button>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+        <script>
+            var app = new Vue({
+                el:"#app",
+                data:{
+                    list:["a","b","c"]
+                },
+                methods:{
+                    addList(){
+                        this.list.push("b")
+                    }
+                },
+                beforeCreate(){
+                    console.log("I am called before components created...")
+                },
+                created(){
+                    console.log("I am called after components created....")
+                },
+                beforeMount(){
+                    console.log("I am called before mount")
+                },
+                mounted(){
+                    console.log("I am called after mount")
+                },
+                beforeUpdate(){
+                    console.log("I am called before updated")
+                },
+                updated(){
+                    console.log("I am called after updated")
+                },
+                beforeDestoryed(){},
+                destoryed(){}
+            })
+        </script>
+    </body>
+</html>
