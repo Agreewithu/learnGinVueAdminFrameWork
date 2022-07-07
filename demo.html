@@ -14,8 +14,14 @@
             message:{{message}}
             check:{{check}}
             <input type="text" v-model="message">
-            <input type="checkbox" v-model="check">
-            <input type="checkbox" v-model="check">
+            <input type="checkbox" v-model="check" value="A" id="a">
+            <label for="a">Option A</label> 
+            <input type="checkbox" v-model="check" value="B" id="b">
+            <label for="b">Option B</label> 
+            <input type="checkbox" v-model="check" value="C" id="c">
+            <label for="c">Option C</label> 
+            <input type="checkbox" v-model="check" value="D" id="d">
+            <label for="d">Option D</label> 
         </div>
         <div id="anotherApp">
             anMessage:{{anMessage}}
@@ -27,7 +33,7 @@
                 el:"#app",
                 data:{
                     message:"hello, world",
-                    check:true,
+                    check:[],
                 }
             })
             var anApp = new Vue({
