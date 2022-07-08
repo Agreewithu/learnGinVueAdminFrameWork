@@ -6,19 +6,19 @@
     </head>
     <body>
         <div id="app">
-
+            <father></father>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
         <!--Use Script Element as Template Importer-->
 
-        <script type="x-template" id="#father">
+        <script type="x-template" id="father">
             <div>
-                <children></children>
+                <children :hello="hello"></children>
             </div>
         </script>
 
-        <script type="x-template" id="#children">
+        <script type="x-template" id="children">
             <div>
                 {{hello}}
             </div>
@@ -26,13 +26,25 @@
 
         <script>
 
-            var father = {
-                name:"",
-                template:"#father"
+            var children = {
+                name:"children",
+                template:"#children",
+                props:{
+                    hello:String
+                }
             }
 
-            var children = {
-                
+            var father = {
+                name:"father",
+                template:"#father",
+                data(){
+                    return{
+                        hello:"hello Agreewithu"
+                    }
+                },
+                components:{
+                    children:children
+                }
             }
 
             var app = new Vue({

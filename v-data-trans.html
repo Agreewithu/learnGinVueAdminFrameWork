@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="This file is created for test
+         children component submit patameter to father component">
+        <title>Vue Basic</title>
+    </head>
+    <body>
+        <div id="app">
+            <father></father>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+
+        <script id="father" type="x-template">
+            <div>
+                <children :hello="fhello" :transParaToFather="getFromChildrenPara"></children>
+                <div>
+                    Show parameter getting from children component...
+                    {{childrenCompReceiver}}
+                </div>
+            </div>
+        </script>
+
+        <script id="children" type="x-template">
+            <div>
+                <div>
+                    {{hello}}
+                </div>
+                <div>
+                    <button @click="transParaToFather(chello)">Submit chidren param to father component</button>
+                </div>
+            </div>
+        </script>
+
+        <script>
+
+            var children = {
+                name:"children",
+                data(){
+                    return{
+                        chello:"Hello, this is respect from children component"
+                    }
+                },
+                props:{
+                    hello:String,
+                    transParaToFather:Function,
+                },
+                template:"#children"
+            }
+
+            var father = {
+                name:"father",
+                data(){
+                    return{
+                        fhello:"Hello, Agreewithu~",
+                        childrenCompReceiver:""
+                    }
+                },
+                template:"#father",
+                methods:{
+                    getFromChildrenPara(p){
+                        this.childrenCompReceiver = p
+                    }
+                },
+                components:{
+                    children:children
+                }
+            }
+
+            var app = new Vue({
+                el:"#app",
+                data:{
+
+                },
+                methods:{
+
+                },
+                components:{
+                    father:father
+                }
+            })
+        </script>
+    </body>
+</html>
