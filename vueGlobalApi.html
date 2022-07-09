@@ -8,28 +8,124 @@
     <body>
 
         <div id="app">
-
+            <father></father>
+            <!--vueGlobalApi-->
+            <div v-color="color">Custom command to set dom style</div>
+            <div>
+                <ul>
+                    <li v-for="item in list" :key="item.id">{{item.name}}</li>
+                </ul>
+                <button @click="addList">Add list button</button>
+                <button @click="changeFirstElementName">changeFirstElementName</button>
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+        <!--template of father component-->
+        <script type="x-template" id="father">
+
+            <div>
+                Parameter receive from children component: {{receiver.name}}
+
+                <children :transmissionData="transmissData"></children>
+            </div>
+
+
+        </script>
+
+
+        <!--template of children component-->
+
+        <script type="x-template" id="children">
+
+            <div>
+                <input type="text" v-model="message" placeholder="please enter message">
+                <button @click="transmissionData(message)">Submit message to receiver</button>
+            </div>
+
+        </script>
+
         <script>
 
+
+            Vue.directive("color",function(el,binding){
+                el.style.color = binding.value
+            })
+
+            var children = {
+                name:"children",
+                data(){
+                    return{
+                        message:""
+                    }
+                },
+                props:{
+                    transmissionData:Function
+                },
+                template:"#children"
+            }
+
             var father = {
-                name:father
+                name:"father",
+                data(){
+                    return{
+                        receiver:{
+                            name:""
+                        }
+                    }
+                },
+                components:{
+                    children:children
+                },
+                methods:{
+                    transmissData(p){
+                        this.receiver.name = p
+                    }
+                },
+                template:"#father"
             }
 
             var app = new Vue({
                 el:"#app",
                 data:{
-
+                    color:"red",
+                    list:[
+                        {
+                            id:1,
+                            name:"good"
+                        },
+                        {
+                            id:2,
+                            name:"fine"
+                        },
+                        {
+                            id:3,
+                            name:"well"
+                        }
+                    ]
                 },
                 methods:{
-
+                    addList(){
+                        addItem = {}
+                        addItem.id = this.list.length + 1
+                        addItem.name = addItem.id.toString() + ":addNum"
+                        this.list.push(addItem)
+                        console.log(this.list)
+                    },
+                    changeFirstElementName(){
+                        changedItem = {
+                            id:1,
+                            name:"changedName"
+                        }
+                        Vue.set(this.list,0,changedItem)
+                    }
                 },
                 components:{
-
+                    father:father
                 }
             })
+
         </script>
 
     </body>
