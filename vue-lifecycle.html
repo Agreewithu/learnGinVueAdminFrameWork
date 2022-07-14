@@ -11,6 +11,8 @@
             </ul>
 
             <button @click="addList">+</button>
+
+            <p>{{msg}}</p>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -18,7 +20,8 @@
             var app = new Vue({
                 el:"#app",
                 data:{
-                    list:["a","b","c"]
+                    list:["a","b","c"],
+                    msg:""
                 },
                 methods:{
                     addList(){
@@ -27,18 +30,22 @@
                 },
                 beforeCreate(){
                     console.log("I am called before components created...")
+                    this.msg = "fine"
                 },
                 created(){
                     console.log("I am called after components created....")
+                    this.msg = "good"
                 },
                 beforeMount(){
                     console.log("I am called before mount")
                 },
                 mounted(){
                     console.log("I am called after mount")
+                    // this.msg = "well"
                 },
                 beforeUpdate(){
                     console.log("I am called before updated")
+                    // this.msg = "ok"
                 },
                 updated(){
                     console.log("I am called after updated")
