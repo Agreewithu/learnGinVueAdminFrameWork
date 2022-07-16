@@ -1,11 +1,76 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        <meta charset="utf-8">
+        <meta name="description" content="This file is for test
+         v-bind data change accompany">
     </head>
     <body>
         <div id="app">
-
+            <div class="ownArea">
+                <div class="dataArea">
+                    {{fhello.msg}}
+                </div>
+                <div class="funcArea">
+                    <button @click="changeMsg">changeOriginalMsg</button>
+                </div>
+            </div>
+            <div class="otherArea">
+                <father :gettedinfo="fhello"></father>
+            </div>
         </div>
+        <!--Area fellow is for component template-->
+        <template id="father">
+            <div class="container">
+                <div class="dataArea">
+                    {{this.gettedinfo.msg}}
+                </div>
+                <div class="funcArea">
+                    <button @click="changeSelfMsg">changeSelf</button>
+                </div>
+            </div>
+        </template>
+        <!--Area fellow is for javascript code-->
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script>
+
+            var father = {
+                props:{
+                    gettedinfo:{
+                        type:Object,
+                        default:null
+                    }
+                },
+                methods:{
+                    changeSelfMsg(){
+                        this.gettedinfo = {
+                            msg:"Inner Layer Changed Message..."
+                        }//this is warned....
+                    }
+                },
+                template:"#father"
+            }
+
+            var app = new Vue({
+                el:"#app",
+                data(){
+                    return{
+                        fhello:{
+                            msg:"This information is for test"
+                        }
+                    }
+                },
+                methods:{
+                    changeMsg(){
+                        this.fhello = {
+                            msg:"App Changed Message...."
+                        }
+                    }
+                },
+                components:{
+                    father:father
+                }
+            })
+        </script>
     </body>
 </html>
